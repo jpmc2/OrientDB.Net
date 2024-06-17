@@ -16,6 +16,7 @@ namespace OrientDB.Net.SqlCommandBuilder
         private string _className;
         private Type _type;
         private bool _autoProperties;
+
         public SqlCreateClass()
         {
             _sqlQuery = new SqlQuery();

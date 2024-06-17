@@ -6,8 +6,16 @@ using Microsoft.Extensions.Logging;
 
 namespace OrientDB.Net.Core
 {
+    /// <summary>
+    /// Represents the configuration for OrientDB.
+    /// </summary>
     public class OrientDBConfiguration
     {
+        /// <summary>
+        /// Connects to OrientDB with the specified result type.
+        /// </summary>
+        /// <typeparam name="TResultType">The result type of the connection.</typeparam>
+        /// <returns>An instance of <see cref="OrientDBConnectionConfiguration{TResultType}"/>.</returns>
         public OrientDBConnectionConfiguration<TResultType> ConnectWith<TResultType>()
         {
             _connectionType = typeof(TResultType);
@@ -23,6 +31,10 @@ namespace OrientDB.Net.Core
                 _connectionProtocol = ca;
             });
         }
+
+        /// <summary>
+        /// Gets the logging configuration for OrientDB.
+        /// </summary>
         public OrientDBLoggingConfiguration LogWith { get; }
 
         private object _serializer;
@@ -32,6 +44,9 @@ namespace OrientDB.Net.Core
 
         private IOrientDatabaseConnection _orientConnection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrientDBConfiguration"/> class.
+        /// </summary>
         public OrientDBConfiguration()
         {
             LogWith = new OrientDBLoggingConfiguration(this, (l) =>
@@ -41,8 +56,12 @@ namespace OrientDB.Net.Core
                 _logger = l;
             });
         }
-        
 
+        /// <summary>
+        /// Creates a factory for creating OrientDB connections.
+        /// </summary>
+        /// <returns>An instance of <see cref="IOrientConnectionFactory"/>.</returns>
+        /// <exception cref="NullReferenceException">Thrown when the connection protocol, serializer, or logger is null.</exception>
         public IOrientConnectionFactory CreateFactory()
         {
             if (_connectionProtocol == null)

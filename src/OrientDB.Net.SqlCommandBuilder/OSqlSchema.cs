@@ -7,7 +7,7 @@ namespace OrientDB.Net.SqlCommandBuilder
     public class OSqlSchema
     {
         private string query = "select expand(classes) from metadata:schema";
-        private IEnumerable<DictionaryOrientDBEntity> _schema;
+        private IEnumerable<DictionaryOrientDBEntity> _schema = new List<DictionaryOrientDBEntity>();
 
         internal OSqlSchema()
         {

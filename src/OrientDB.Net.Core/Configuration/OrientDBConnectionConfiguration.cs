@@ -3,6 +3,10 @@ using System;
 
 namespace OrientDB.Net.Core.Configuration
 {
+    /// <summary>
+    /// Represents the configuration for an OrientDB connection.
+    /// </summary>
+    /// <typeparam name="TDataType">The type of data to be serialized and deserialized.</typeparam>
     public class OrientDBConnectionConfiguration<TDataType>
     {
         private readonly OrientDBConfiguration _configuration;
@@ -10,8 +14,8 @@ namespace OrientDB.Net.Core.Configuration
         private readonly Action<IOrientDBRecordSerializer<TDataType>> _serializerAction;
 
         internal OrientDBConnectionConfiguration(
-            OrientDBConfiguration configuration, 
-            Action<IOrientDBRecordSerializer<TDataType>> serializerAction, 
+            OrientDBConfiguration configuration,
+            Action<IOrientDBRecordSerializer<TDataType>> serializerAction,
             Action<IOrientDBConnectionProtocol<TDataType>> configAction)
         {
             _configuration = configuration ?? throw new ArgumentNullException($"{nameof(configuration)} cannot be null.");
@@ -19,6 +23,11 @@ namespace OrientDB.Net.Core.Configuration
             _serializerAction = serializerAction ?? throw new ArgumentNullException($"{nameof(serializerAction)} cannot be null.");
         }
 
+        /// <summary>
+        /// Connects to the OrientDB server using the specified connection protocol.
+        /// </summary>
+        /// <param name="protocol">The connection protocol to use.</param>
+        /// <returns>An instance of <see cref="OrientDBConnectionProtocolConfiguration{TDataType}"/>.</returns>
         public OrientDBConnectionProtocolConfiguration<TDataType> Connect(IOrientDBConnectionProtocol<TDataType> protocol)
         {
             if (protocol == null)

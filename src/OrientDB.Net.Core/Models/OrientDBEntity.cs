@@ -8,11 +8,30 @@ namespace OrientDB.Net.Core.Models
 {
     public abstract class OrientDBEntity
     {
+        /// <summary>
+        /// Gets or sets the ORID (OrientDB Record ID) of the entity.
+        /// </summary>
         public ORID ORID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the version of the entity.
+        /// </summary>
         public int OVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class ID of the entity.
+        /// </summary>
         public short OClassId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class name of the entity.
+        /// </summary>
         public string OClassName { get; set; }
 
+        /// <summary>
+        /// Hydrates the entity with the provided data.
+        /// </summary>
+        /// <param name="data">The data to hydrate the entity with.</param>
         public virtual void Hydrate(IDictionary<string, object> data)
         {
             var type = this.GetType();
